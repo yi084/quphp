@@ -1,0 +1,26 @@
+<div class="top">
+  <div class="container">
+    <div class="top-logo"><a href="./" title="<?=config('APP_TITLE')?>"><img src="../../images/logo.png"></a></div>
+    <div class="top-nav">
+      <!-- 使用for循环遍历config对应的键值，让top-nav的a标题引用config.PHP文件里的APP_NAV键的内容，键值有多少，出现的标题就有多少 -->
+      <?php foreach (config('APP_NAV') as $k => $v): ?>
+      <!-- 当 APP_NAV 数组的键名与$type 相同时，为链接添加 class 为 curr 的样式。 -->
+        <a class="<?=(isset($type) && ($type == $k)) ? 'curr' : ''?>" href="./?type=<?=$k?>"><?=$v?></a>
+      <?php endforeach; ?>
+    </div>
+
+    <!-- 登录注册模块 -->
+    <div class="top-right">
+      <?php if(IS_LOGIN): ?>
+        欢迎您，
+        <a href="../../user.php">
+          <strong><?=user('name')?></strong>
+        </a>
+        <i></i>
+        <a href="login.php?action=logout&token=<?=TOKEN?>">退出</a>
+      <?php else: ?>
+        <a href="login.php">登录</a><i></i><a href="register.php">注册</a>
+      <?php endif; ?>
+    </div>
+  </div>
+</div>
